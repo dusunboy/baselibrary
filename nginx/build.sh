@@ -25,6 +25,7 @@ else
     echo "image run check faild.";
     exit 1;
 fi
+docker rm -f image-test
 }
 
 

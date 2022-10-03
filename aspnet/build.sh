@@ -26,6 +26,7 @@ do
         exit 1;
     fi
 done
+docker rm -f image-test
 }
 
 
