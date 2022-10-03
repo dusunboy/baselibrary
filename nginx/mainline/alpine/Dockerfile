@@ -1,6 +1,6 @@
 FROM alpine:3.14
 
-RUN  export NGINX_VERSION='1.20.2' \
+RUN  export NGINX_VERSION='1.22.0' \
      && export CONFIG="\
           --prefix=/etc/nginx \
           --sbin-path=/usr/sbin/nginx \
