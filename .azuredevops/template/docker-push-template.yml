@@ -1,0 +1,15 @@
+steps:
+  - checkout: none
+  - task: Docker@2
+    displayName: DockerLogin
+    inputs:
+      containerRegistry: docker.io
+      command: login
+      addPipelineData: false
+      addBaseImageData: false
+  - task: Bash@3
+    displayName: 'DockerPush'
+    inputs:
+      targetType: filePath
+      filePath: ./$(image)/build.sh
+      arguments: '--push'

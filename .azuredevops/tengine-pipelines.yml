@@ -1,0 +1,47 @@
+name: $(image)-$(Date:yyyyMMdd)-$(Rev:r)
+
+trigger: 
+  batch: true
+  branches:
+    include:
+    - 'refs/tags/tengine*'
+    - '*'
+  paths:
+    include:
+    - 'tengine/*'
+    exclude:
+    - '*'
+pr:
+  branches:
+    include:
+    - '*'
+  paths:
+      include:
+      - 'tengine/*'
+      exclude:
+      - '*'
+
+variables:
+  - group: build
+  - name: image
+    value: tengine
+
+pool:
+  name: Default
+
+resources:
+- repo: self
+
+jobs:
+  - job: Build
+    displayName: Docler Build
+    workspace:
+      clean: all
+    steps:
+      - template: template/docker-build-template.yml
+  - job: Push
+    displayName: Docker Push
+    steps:
+      - template: template/docker-push-template.yml
+    dependsOn: Build
+    condition: and(contains(variables['build.sourceBranch'], 'refs/tags'), succeeded())
