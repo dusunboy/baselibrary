@@ -1,0 +1,29 @@
+name: docker-clean-$(Date:yyyyMMdd)-$(Rev:r)
+
+trigger: none
+pr: none
+
+schedules:
+- cron: "0 12 * * *"
+  displayName: Daily midnight build
+  branches:
+    include:
+    - master
+
+pool:
+  name: Default
+
+resources:
+- repo: self
+
+jobs:
+- job: Build
+  displayName: Build
+  steps:
+  - checkout: none
+  - task: Bash@3
+    displayName: DockerPrune
+    inputs:
+      targetType: inline
+      script: |
+        docker system prune -f -a
