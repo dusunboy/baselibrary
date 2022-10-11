@@ -10,8 +10,8 @@ schedules:
     include:
       - master
     exclude:
-      - *
-  always：true
+      - '*'
+  always: true
 
 pool:
   name: Default
