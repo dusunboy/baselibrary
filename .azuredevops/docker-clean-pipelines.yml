@@ -9,8 +9,6 @@ schedules:
   branches:
     include:
       - master
-    exclude:
-      - '*'
   always: true
 
 pool:
