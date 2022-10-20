@@ -1,6 +1,6 @@
-FROM alpine:3.14
+FROM alpine:3.16
 
-RUN  export NGINX_VERSION='1.22.0' \
+RUN  export NGINX_VERSION='1.22.1' \
      && export CONFIG="\
           --prefix=/etc/nginx \
           --sbin-path=/usr/sbin/nginx \
@@ -53,7 +53,6 @@ RUN  export NGINX_VERSION='1.22.0' \
           --add-module=modules/nginx_http_upstream_check_module \
           --add-module=modules/nginx-limit-speed-module \
           --add-module=modules/ngx_devel_kit-0.3.1 \
-          --add-module=modules/ngx_brotli \
           --add-module=modules/lua-nginx-module-0.10.14 \
           --add-module=modules/nginx-module-vts-0.1.18 \
           " \
@@ -122,21 +121,18 @@ RUN  export NGINX_VERSION='1.22.0' \
           && curl -L "http://storage.corpintra.plus/nginx/modules/headers-more-nginx-module.tar.gz" -o headers-more-nginx-module.tar.gz \
           && curl -L "http://storage.corpintra.plus/nginx/modules/nginx-module-vts-0.1.18.tar.gz" -o nginx-module-vts-0.1.18.tar.gz \
           && curl -L "http://storage.corpintra.plus/nginx/modules/ngx_devel_kit-0.3.1.tar.gz" -o ngx_devel_kit-0.3.1.tar.gz \
-          && curl -L "http://storage.corpintra.plus/nginx/modules/ngx_brotli.tar.gz" -o ngx_brotli.tar.gz \
           && curl -L "http://storage.corpintra.plus/nginx/modules/nginx-limit-speed-module.tar.gz" -o nginx-limit-speed-module.tar.gz \
           && curl -L "http://storage.corpintra.plus/nginx/modules/nginx_http_upstream_check_module.tar.gz" -o nginx_http_upstream_check_module.tar.gz \
           && tar -zxC /usr/src/nginx-$NGINX_VERSION/modules -f lua-nginx-module-0.10.14.tar.gz \
           && tar -zxC /usr/src/nginx-$NGINX_VERSION/modules -f headers-more-nginx-module.tar.gz \
           && tar -zxC /usr/src/nginx-$NGINX_VERSION/modules -f nginx-module-vts-0.1.18.tar.gz \
           && tar -zxC /usr/src/nginx-$NGINX_VERSION/modules -f ngx_devel_kit-0.3.1.tar.gz \
-          && tar -zxC /usr/src/nginx-$NGINX_VERSION/modules -f ngx_brotli.tar.gz \
           && tar -zxC /usr/src/nginx-$NGINX_VERSION/modules -f nginx-limit-speed-module.tar.gz \
           && tar -zxC /usr/src/nginx-$NGINX_VERSION/modules -f nginx_http_upstream_check_module.tar.gz \
           && rm  lua-nginx-module-0.10.14.tar.gz \
           && rm  headers-more-nginx-module.tar.gz \
           && rm  nginx-module-vts-0.1.18.tar.gz \
           && rm  ngx_devel_kit-0.3.1.tar.gz \
-          && rm  ngx_brotli.tar.gz \
           && rm  nginx-limit-speed-module.tar.gz \
           && rm  nginx_http_upstream_check_module.tar.gz \
           && ls -l /usr/src/nginx-$NGINX_VERSION/modules \
