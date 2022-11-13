@@ -21,6 +21,14 @@ pr:
       exclude:
       - '*'
 
+schedules:
+- cron: "30 21 1-7,15-21 * 1"
+  displayName: Daily midnight build
+  branches:
+    include:
+      - 'refs/tags/jenkins-inbound-agent*'
+  always: true
+
 variables:
   - group: build
   - name: image
