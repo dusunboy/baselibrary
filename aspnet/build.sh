@@ -9,7 +9,7 @@ tag="3.1 5.0 6.0"
 BUILD () {
 for tag in ${tag};
 do
-    docker build --pull --no-cache -f ${dir}/mainline/${tag}/Dockerfile -t ${registry}/${repository}:${tag} ${dir}
+    docker build --pull --no-cache -f ${dir}/Dockerfile -t ${registry}/${repository}:${tag} --build-arg tag=${tag} ${dir}
 done
 }
 

@@ -8,7 +8,7 @@ tag=`cat ${dir}/version`
 
 BUILD () {
 docker build --pull --no-cache \
-    -f ${dir}/mainline/alpine/Dockerfile \
+    -f ${dir}/Dockerfile \
     -t ${registry}/${repository}:${tag} \
     -t ${registry}/${repository}:${tag}-alpine \
     -t ${registry}/${repository}:latest \
