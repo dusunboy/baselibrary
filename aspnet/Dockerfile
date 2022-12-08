@@ -1,6 +1,6 @@
 ARG  tag=6.0
 FROM mcr.microsoft.com/dotnet/aspnet:${tag}
-RUN sed -i 's/deb.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list \
+RUN sed -i -e 's/deb.debian.org/mirrors.cloud.tencent.com/g' -e 's/security.debian.org/mirrors.cloud.tencent.com/g' /etc/apt/sources.list \
     && apt-get update -qq \
     && apt-get -y install curl telnet \
     && addgroup --system --gid 1000 appuser \
